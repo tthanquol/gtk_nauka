@@ -60,6 +60,7 @@ gtk_box_pack_start(GTK_BOX(vBox),menu_container,FALSE,FALSE,0); //dodanie paska 
 
 
 g_signal_connect(G_OBJECT(MainWindow), "destroy", G_CALLBACK(gtk_main_quit), NULL); //zakończenie procesu w przypadku zamknięcia okna
+g_signal_connect(G_OBJECT(exit),"activate", G_CALLBACK(gtk_main_quit),NULL);
 //g_signal_connect(G_OBJECT(MainWindow),)
 gtk_widget_show_all(MainWindow); //wyświetlenie okna programu
 gtk_main(); //uruchomienie pętli głównej
