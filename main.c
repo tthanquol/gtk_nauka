@@ -19,20 +19,22 @@ GtkWidget *menu_pomoc;
 GtkWidget *pomoc;
 GtkWidget *o_programie;
 
-
-
 GtkAccelGroup *akceleratory;
+
+GtkWidget *wallpaper;
 
 
 gtk_init(&argc, &argv); //zainicjowanie GTK+ i przekazanie parametrów uruchomieniowych programu
 //okno główne
 MainWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL); //utworzenie okna programu z dekoracjami i domyślnym rozmiarem (200x200)
-gtk_window_set_default_size(GTK_WINDOW(MainWindow),400,200); //ustawienie rozmiaru okna
+//gtk_window_set_default_size(GTK_WINDOW(MainWindow),400,200); //ustawienie rozmiaru okna
 gtk_window_set_position(GTK_WINDOW(MainWindow),GTK_WIN_POS_CENTER); //ustawinie okna na środku ekranu
 gtk_window_set_title(GTK_WINDOW(MainWindow),"Nauka GTK+"); //ustawianie tytułu okna
+gtk_window_set_resizable(GTK_WINDOW(MainWindow), FALSE);
 
 vBox = gtk_vbox_new(FALSE,0); //utworzenie kontenera typu vbox
 gtk_container_add(GTK_CONTAINER(MainWindow),vBox); //umieszczenie vboxa w oknie głównym
+
 
 menu_container = gtk_menu_bar_new(); //stworzenie paska dla menu
 
@@ -74,6 +76,8 @@ gtk_menu_shell_append(GTK_MENU_SHELL(menu_container),pomoc);
 
 
 gtk_box_pack_start(GTK_BOX(vBox),menu_container,FALSE,FALSE,0); //dodanie paska menu do kontenera vbox
+wallpaper = gtk_image_new_from_file("hello_world.jpg");
+gtk_box_pack_start(GTK_BOX(vBox),wallpaper,FALSE,FALSE,5);
 
 
 g_signal_connect(G_OBJECT(MainWindow), "destroy", G_CALLBACK(gtk_main_quit), NULL); //zakończenie procesu w przypadku zamknięcia okna
