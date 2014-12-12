@@ -12,11 +12,14 @@ GtkWidget *menu_container; //referencja do paska na menu
 GtkWidget *menu_plik; //referencja do menu_plik
 GtkWidget *plik; //referencja do pozycji menu w menu_plik
 GtkWidget *nowy; //referencja do pozycji Nowy w menu_plik
+GtkWidget *separator;
 GtkWidget *exit; //referencja do pozycji wyjdz w menu_plik
 
 GtkWidget *menu_pomoc;
 GtkWidget *pomoc;
 GtkWidget *o_programie;
+
+
 
 GtkAccelGroup *akceleratory;
 
@@ -40,24 +43,30 @@ akceleratory = gtk_accel_group_new(); //utworzenie grupy akceleratorów
 gtk_window_add_accel_group(GTK_WINDOW(MainWindow), akceleratory); //dodanie grupy akceleratorów do okna głównego
 
 plik = gtk_menu_item_new_with_mnemonic("_Plik"); //stworzenie pozycji głownej dla menu plik
-pomoc = gtk_menu_item_new_with_mnemonic("P_omoc"); //stworzenie pozycji głownej dla menu pomoc
-
-exit = gtk_image_menu_item_new_from_stock(GTK_STOCK_QUIT,NULL);//stworzenie pozycji wyjdz dla menu plik (z predefiniowanych etykiet)
-gtk_image_menu_item_set_always_show_image(GTK_IMAGE_MENU_ITEM(exit),TRUE);//wymuszenie pokazywania obrazków dla pozycji menu
-gtk_widget_add_accelerator(exit, "activate",akceleratory, GDK_q, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE); //podpięcie akceleratora CTRL+q dla pozycji wyjdż
 
 nowy = gtk_image_menu_item_new_from_stock(GTK_STOCK_NEW,NULL);//stworzenie pozycji nowy dla menu plik (z predefiniowanych etykiet)
 gtk_image_menu_item_set_always_show_image(GTK_IMAGE_MENU_ITEM(nowy),TRUE);
 gtk_widget_add_accelerator(nowy, "activate",akceleratory, GDK_n, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
+separator = gtk_separator_menu_item_new(); //stworzenie separatora
+
+exit = gtk_image_menu_item_new_from_stock(GTK_STOCK_QUIT,NULL);//stworzenie pozycji wyjdz dla menu plik (z predefiniowanych etykiet)
+gtk_image_menu_item_set_always_show_image(GTK_IMAGE_MENU_ITEM(exit),TRUE);//wymuszenie pokazywania obrazków dla pozycji menu
+gtk_widget_add_accelerator(exit, "activate",akceleratory, GDK_q, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE); //podpięcie akceleratora CTRL+q dla pozycji wyjdż
+
+gtk_menu_item_set_submenu(GTK_MENU_ITEM(plik),menu_plik); //przypisanie pozycji plik do menu plik
+gtk_menu_shell_append(GTK_MENU_SHELL(menu_plik),nowy); //dodanie pozycji nowy do menu plik
+gtk_menu_shell_append(GTK_MENU_SHELL(menu_plik), separator);
+gtk_menu_shell_append(GTK_MENU_SHELL(menu_plik),exit); //dpdanie pozycji wyjdz do menu plik
+gtk_menu_shell_append(GTK_MENU_SHELL(menu_container),plik); //dodanie menu plik do paska menu
+
+pomoc = gtk_menu_item_new_with_mnemonic("P_omoc"); //stworzenie pozycji głownej dla menu pomoc
+
 o_programie =gtk_image_menu_item_new_from_stock(GTK_STOCK_ABOUT,NULL);
 gtk_image_menu_item_set_always_show_image(GTK_IMAGE_MENU_ITEM(o_programie),TRUE);
 gtk_widget_add_accelerator(o_programie, "activate",akceleratory, GDK_i, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
-gtk_menu_item_set_submenu(GTK_MENU_ITEM(plik),menu_plik); //przypisanie pozycji plik do menu plik
-gtk_menu_shell_append(GTK_MENU_SHELL(menu_plik),nowy); //dodanie pozycji nowy do menu plik
-gtk_menu_shell_append(GTK_MENU_SHELL(menu_plik),exit); //dpdanie pozycji wyjdz do menu plik
-gtk_menu_shell_append(GTK_MENU_SHELL(menu_container),plik); //dodanie menu plik do paska menu
+
 
 gtk_menu_item_set_submenu(GTK_MENU_ITEM(pomoc),menu_pomoc);
 gtk_menu_shell_append(GTK_MENU_SHELL(menu_pomoc),o_programie);
