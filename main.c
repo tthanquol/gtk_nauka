@@ -20,6 +20,7 @@ Btn_Zamknij = gtk_button_new_with_label("Zamknij"); //tworzenie przycisku
 gtk_widget_set_size_request(Btn_Zamknij,120,50); //nadawania rozmiaru dla przyciski
 gtk_fixed_put(GTK_FIXED(MainContainer),Btn_Zamknij,270,140); //dodanie przycisku do kontenera i ustalanie jego pozycji
 
+g_signal_connect(G_OBJECT(Btn_Zamknij),"clicked",G_CALLBACK(gtk_main_quit),NULL);
 g_signal_connect(G_OBJECT(MainWindow), "destroy", G_CALLBACK(gtk_main_quit), NULL); //zakończenie procesu w przypadku zamknięcia okna
 //g_signal_connect(G_OBJECT(MainWindow),)
 gtk_widget_show_all(MainWindow); //wyświetlenie okna programu
