@@ -1,7 +1,8 @@
 # depslib dependency file v1.0
-1418420036 source:/home/tete/koding/gtk_app/main.c
+1418423011 source:/home/tete/koding/gtk_app/main.c
 	<stdlib.h>
 	<gtk/gtk.h>
+	<gdk/gdkkeysyms.h>
 
 1412966800 /usr/include/gtk-2.0/gtk/gtk.h
 	<gdk/gdk.h>
@@ -2480,4 +2481,9 @@
 
 1412966800 /usr/include/gtk-2.0/gtk/gtktipsquery.h
 	<gtk/gtk.h>
+
+1412966793 /usr/include/gtk-2.0/gdk/gdkkeysyms.h
+	<gdk/gdkkeysyms-compat.h>
+
+1412966793 /usr/include/gtk-2.0/gdk/gdkkeysyms-compat.h
 
