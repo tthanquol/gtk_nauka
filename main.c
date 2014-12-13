@@ -2,6 +2,19 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 
+void show_info(GtkWidget *widget, gpointer okno)
+{
+GtkWidget *dw_Info = gtk_about_dialog_new();
+gtk_about_dialog_set_name(GTK_ABOUT_DIALOG(dw_Info), "O programie");
+gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(dw_Info), "0.1");
+gtk_about_dialog_set_copyright(GTK_ABOUT_DIALOG(dw_Info), "(c) Tomasz \"tete\" W.");
+gtk_about_dialog_set_comments(GTK_ABOUT_DIALOG(dw_Info), "Program trenażer do nauki tworzenia okien GTK+");
+gtk_about_dialog_set_website(GTK_ABOUT_DIALOG(dw_Info), "https://github.com/tthanquol/gtk_nauka");
+gtk_window_set_title(GTK_WINDOW(dw_Info), "O programie");
+gtk_dialog_run(GTK_DIALOG(dw_Info));
+gtk_widget_destroy(dw_Info);
+}
+
 int main (int argc, char *argv[])
 {
 GtkWidget *MainWindow; //referencja do widżetu okna głownego
@@ -22,7 +35,6 @@ GtkWidget *o_programie;
 GtkAccelGroup *akceleratory;
 
 GtkWidget *wallpaper;
-
 
 gtk_init(&argc, &argv); //zainicjowanie GTK+ i przekazanie parametrów uruchomieniowych programu
 //okno główne
@@ -82,6 +94,7 @@ gtk_box_pack_start(GTK_BOX(vBox),wallpaper,FALSE,FALSE,5);
 
 g_signal_connect(G_OBJECT(MainWindow), "destroy", G_CALLBACK(gtk_main_quit), NULL); //zakończenie procesu w przypadku zamknięcia okna
 g_signal_connect(G_OBJECT(exit),"activate", G_CALLBACK(gtk_main_quit),NULL);
+g_signal_connect(G_OBJECT(o_programie),"activate", G_CALLBACK(show_info),(gpointer)MainWindow);
 //g_signal_connect(G_OBJECT(MainWindow),)
 gtk_widget_show_all(MainWindow); //wyświetlenie okna programu
 gtk_main(); //uruchomienie pętli głównej
@@ -89,3 +102,5 @@ gtk_main(); //uruchomienie pętli głównej
 
   return 0;
 }
+
+
