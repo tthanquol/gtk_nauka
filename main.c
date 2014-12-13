@@ -5,12 +5,14 @@
 void show_info(GtkWidget *widget, gpointer okno)
 {
 GtkWidget *dw_Info = gtk_about_dialog_new();
-gtk_about_dialog_set_name(GTK_ABOUT_DIALOG(dw_Info), "O programie");
+gtk_about_dialog_set_name(GTK_ABOUT_DIALOG(dw_Info), "Nauka GTK+");
+gtk_about_dialog_set_logo (GTK_ABOUT_DIALOG(dw_Info),NULL);
 gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(dw_Info), "0.1");
 gtk_about_dialog_set_copyright(GTK_ABOUT_DIALOG(dw_Info), "(c) Tomasz \"tete\" W.");
 gtk_about_dialog_set_comments(GTK_ABOUT_DIALOG(dw_Info), "Program trenażer do nauki tworzenia okien GTK+");
 gtk_about_dialog_set_website(GTK_ABOUT_DIALOG(dw_Info), "https://github.com/tthanquol/gtk_nauka");
 gtk_window_set_title(GTK_WINDOW(dw_Info), "O programie");
+
 gtk_dialog_run(GTK_DIALOG(dw_Info));
 gtk_widget_destroy(dw_Info);
 }
