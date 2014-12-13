@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1418426823 source:/home/tete/koding/gtk_app/main.c
+1418495994 source:/home/tete/koding/gtk_app/main.c
 	<stdlib.h>
 	<gtk/gtk.h>
 	<gdk/gdkkeysyms.h>

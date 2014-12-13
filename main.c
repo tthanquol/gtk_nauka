@@ -1,20 +1,44 @@
 #include <stdlib.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
-
 void show_info(GtkWidget *widget, gpointer okno)
 {
 GtkWidget *dw_Info = gtk_about_dialog_new();
+//GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file("GTK_icon.png", NULL);
+
 gtk_about_dialog_set_name(GTK_ABOUT_DIALOG(dw_Info), "Nauka GTK+");
-gtk_about_dialog_set_logo (GTK_ABOUT_DIALOG(dw_Info),NULL);
+//gtk_about_dialog_set_logo (GTK_ABOUT_DIALOG(dw_Info),pixbuf);
 gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(dw_Info), "0.1");
 gtk_about_dialog_set_copyright(GTK_ABOUT_DIALOG(dw_Info), "(c) Tomasz \"tete\" W.");
 gtk_about_dialog_set_comments(GTK_ABOUT_DIALOG(dw_Info), "Program trenażer do nauki tworzenia okien GTK+");
 gtk_about_dialog_set_website(GTK_ABOUT_DIALOG(dw_Info), "https://github.com/tthanquol/gtk_nauka");
 gtk_window_set_title(GTK_WINDOW(dw_Info), "O programie");
 
+//g_object_unref(pixbuf), pixbuf = NULL;
 gtk_dialog_run(GTK_DIALOG(dw_Info));
 gtk_widget_destroy(dw_Info);
+}
+
+void open_file_dialog(GtkWidget *widget, gpointer okno)
+{
+    GtkWidget *dialog;
+
+    dialog = gtk_file_chooser_dialog_new (
+    "Otwórz...",
+    GTK_WINDOW(okno),
+    GTK_FILE_CHOOSER_ACTION_OPEN, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+    NULL);
+
+//    if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
+//    {
+//        char *nazwa_pliku;
+//
+//        nazwa_pliku = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+//        //gtk_label_set_text(GTK_LABEL(etykieta), nazwa_pliku);
+//        g_free (nazwa_pliku);
+//    }
+gtk_dialog_run (GTK_DIALOG (dialog));
+gtk_widget_destroy (dialog);
 }
 
 int main (int argc, char *argv[])
@@ -93,10 +117,11 @@ gtk_box_pack_start(GTK_BOX(vBox),menu_container,FALSE,FALSE,0); //dodanie paska 
 wallpaper = gtk_image_new_from_file("hello_world.jpg");
 gtk_box_pack_start(GTK_BOX(vBox),wallpaper,FALSE,FALSE,5);
 
-
+g_signal_connect(G_OBJECT(nowy),"activate", G_CALLBACK(open_file_dialog),(gpointer)MainWindow);
 g_signal_connect(G_OBJECT(MainWindow), "destroy", G_CALLBACK(gtk_main_quit), NULL); //zakończenie procesu w przypadku zamknięcia okna
 g_signal_connect(G_OBJECT(exit),"activate", G_CALLBACK(gtk_main_quit),NULL);
 g_signal_connect(G_OBJECT(o_programie),"activate", G_CALLBACK(show_info),(gpointer)MainWindow);
+
 //g_signal_connect(G_OBJECT(MainWindow),)
 gtk_widget_show_all(MainWindow); //wyświetlenie okna programu
 gtk_main(); //uruchomienie pętli głównej
